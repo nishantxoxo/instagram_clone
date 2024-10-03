@@ -4,6 +4,7 @@ import 'package:instagram/resources/auth_methods.dart';
 import 'package:instagram/responsive/mobile_screen_layout.dart';
 import 'package:instagram/responsive/responsive_layout_screen.dart';
 import 'package:instagram/responsive/web_screen_layout.dart';
+import 'package:instagram/screens/signup_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/text_field_input.dart';
 
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void loginuser() async {
     setState(() {
-      islaoding = false;
+      islaoding = true;
     });
     String res = await AuthMethods()
         .loginuser(email: emailcontroller.text, password: passcontroller.text);
@@ -40,8 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => ResponsiveLayoutScreen(
-              mobilescreenlayout: MobileScreenLayout(),
-              webscreenlayout: WebScreenLayout())));
+              mobilescreenlayout: const MobileScreenLayout(),
+              webscreenlayout: const WebScreenLayout())));
     }
   }
 
@@ -50,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,14 +61,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 'assets/ic_instagram.svg',
                 height: 64,color: primaryColor,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 64,
               ),
               TextFieldInput(
                   hintText: 'enter your email',
                   textEditingController: emailcontroller,
                   textInputType: TextInputType.emailAddress),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               TextFieldInput(
@@ -76,26 +77,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 textInputType: TextInputType.text,
                 ispass: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               InkWell(
                 onTap: loginuser,
                 child: Container(
-                  child: islaoding
-                      ? Center(child: CircularProgressIndicator())
-                      : Text('login'),
                   width: double.infinity,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
                       color: blueColor),
+                  child: islaoding
+                      ? const Center(child: CircularProgressIndicator())
+                      : const Text('login'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Flexible(flex: 2, child: Container(),),
@@ -104,20 +105,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   GestureDetector(
                     child: Container(
-                      child: Text(
-                        'donthave an account',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Text(
+                        'dont have an account ',
+                        //style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
                   GestureDetector(
+                    onTap: ()=> Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignupScreen(),)),
                     child: Container(
-                      child: Text(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Text(
                         'sign up ',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 8),
                     ),
                   )
                 ],
