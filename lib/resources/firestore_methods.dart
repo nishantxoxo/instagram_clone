@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 class FirestoreMethods{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
+  //to upload a post in "posts" collection
   Future<String> uploadPost(String descripton, Uint8List file , String uid, String username, String profimage) async{
     String res ='some error occured';
     try{
@@ -25,7 +25,7 @@ class FirestoreMethods{
   }
 
 
-
+  // like a post by adding the uid of the user in the posts likes array
   Future<void> likePost(String postId, String uid, List likes ) async{
   try{
     if(likes.contains(uid)){
@@ -44,7 +44,7 @@ class FirestoreMethods{
   }
  }
 
-
+ //to add a comment as a collection under the a specific post
  Future<void> postComment(String postid, String text, String uid, String name, String profimage) async{
 
   try{
@@ -75,7 +75,7 @@ class FirestoreMethods{
     }catch(e){}
   }
 
-
+  //if the the the person already follows then unfollow, if not then add follower
   Future<void> followuser(String uid, String followId) async{
     try{}catch(e){
       DocumentSnapshot snap =  await _firestore.collection('users').doc(uid).get();

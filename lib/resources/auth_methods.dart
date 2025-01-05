@@ -9,7 +9,7 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
+  //returns the user model of the current user
   Future<models.User> getUserDetails() async {
     User currentuser = _auth.currentUser!;
     DocumentSnapshot snap = await _firestore.collection('users').doc(currentuser.uid).get();
@@ -17,7 +17,7 @@ class AuthMethods {
   }
   
 
-
+  // signs up user and stores their information in cloud firestore
   Future<String> signUpUser({
     required String email,
     required String password,
@@ -33,10 +33,10 @@ class AuthMethods {
           bio.isNotEmpty ||
           file != null) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
+            email: email, password: password);                                          //sign up the user
 
         String photourl = await StorageMethods()
-            .uploadImageToStorage('profilepics', file, false);
+            .uploadImageToStorage('profilepics', file, false);                          //store their profile pic
 
         models.User user = models.User(
             email: email,
@@ -47,10 +47,10 @@ class AuthMethods {
             followers: [],
             following: []);
 
-        await _firestore
+        await _firestore                                          
             .collection('users')
             .doc(cred.user!.uid)
-            .set(user.tojson());
+            .set(user.tojson());                                  //store their info in cloud firestore
 
         res = "success";
       }
@@ -60,6 +60,7 @@ class AuthMethods {
     return res;
   }
 
+  //to login a user
   Future<String> loginuser(
       {required String email, required String password}) async {
     String res = "error occured";
@@ -75,7 +76,7 @@ class AuthMethods {
     return res;
   }
 
-
+  //sign out the current user
   Future<void> signOut() async{
     await _auth.signOut();
   }

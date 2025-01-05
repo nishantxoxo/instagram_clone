@@ -47,11 +47,28 @@ class _SearchScreenState extends State<SearchScreen> {
                   .where('username', isGreaterThanOrEqualTo: controller.text)
                   .get(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+                // if (!snapshot.hasData) {
+                //   return const Center(
+                //     child: CircularProgressIndicator(),
+                //   );
+                // }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    }
+
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return const Center(
+                        child: Text('No users found.'),
+                      );
+                    }
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return InkWell(

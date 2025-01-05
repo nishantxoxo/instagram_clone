@@ -135,7 +135,7 @@ class _SignScreenState extends State<SignupScreen> {
                 height: 24,
               ),
               TextFieldInput(
-                hintText: 'enter your email',
+                hintText: 'enter your password',
                 textEditingController: passcontroller,
                 textInputType: TextInputType.text,
                 ispass: true,

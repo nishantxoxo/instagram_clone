@@ -3,7 +3,8 @@ import 'package:image_picker/image_picker.dart';
 pickimage(ImageSource source) async {
   final ImagePicker _imagepicker = ImagePicker();
 
-  XFile? _file = await _imagepicker.pickImage(source: source, imageQuality: 60);
+  XFile? _file = await _imagepicker.pickImage(source: source, imageQuality: 60); //compresses the image quality down to 60 percent
+
 
   if (_file != null){
     return await _file.readAsBytes();

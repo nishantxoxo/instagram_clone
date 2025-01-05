@@ -62,7 +62,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
               child: Text('take a photo'),
               onPressed: () async {
                 Navigator.of(context).pop();
+                print("CHECK 1");
                 Uint8List file = await pickimage(ImageSource.camera);  
+                print("CHECK 2");
+
                 setState(() {
                   _file = file;
                 });

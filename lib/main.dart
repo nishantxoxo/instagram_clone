@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         title: 'Instagram Demo',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: webBackgroundColor,
-        ), //this imports colors from the colors.dart file
+        ),                                                                     //this imports colors from the colors.dart file
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
