@@ -17,7 +17,7 @@ class CommentsScreen extends StatefulWidget {
 }
 
 class _CommentsScreenState extends State<CommentsScreen> {
-  final TextEditingController commentcontroller = TextEditingController();
+  final TextEditingController commentcontroller = TextEditingController();         // a controller for comments
   @override
   void dispose() {
     // TODO: implement dispose
@@ -31,7 +31,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
-        title: Text('comments'),
+        title: const Text('comments'),
         centerTitle: false,
       ),
       body: StreamBuilder(
@@ -47,15 +47,15 @@ class _CommentsScreenState extends State<CommentsScreen> {
             );
           }
           // Debugging: Print snapshot data
-          print("Snapshot has data: ${snapshot.hasData}");
-          if (snapshot.hasData) {
-            print("Number of documents: ${snapshot.data!.docs.length}");
-            for (var doc in snapshot.data!.docs) {
-              print("Comment: ${doc.data()}");
-            }
-          } else {
-            print("Snapshot has no data");
-          }
+          // print("Snapshot has data: ${snapshot.hasData}");
+          // if (snapshot.hasData) {
+          //   print("Number of documents: ${snapshot.data!.docs.length}");
+          //   for (var doc in snapshot.data!.docs) {
+          //     print("Comment: ${doc.data()}");
+          //   }
+          // } else {
+          //   print("Snapshot has no data");
+          // }
           return ListView.builder(
             itemBuilder: (context, index) => CommentCard(snap: (snapshot.data! as dynamic).docs[index].data()),
             itemCount: (snapshot.data! as dynamic).docs.length,
@@ -67,7 +67,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
           height: kToolbarHeight,
           margin:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          padding: EdgeInsets.only(left: 16, right: 8),
+          padding: const EdgeInsets.only(left: 16, right: 8),
           child: Row(
             children: [
               CircleAvatar(
@@ -103,7 +103,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                  child: Text(
+                  child: const Text(
                     'post',
                     style: TextStyle(color: Colors.blueAccent),
                   ),

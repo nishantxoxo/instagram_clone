@@ -14,8 +14,10 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final TextEditingController controller = TextEditingController();
-  bool isshowuser = false;
+  //controller for searchbar
+  final TextEditingController controller = TextEditingController();          
+   //determines if the user is searching for someone or not               
+  bool isshowuser = false;  
   @override
   void dispose() {
     // TODO: implement dispose
@@ -30,8 +32,9 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: mobileBackgroundColor,
         title: TextField(
           onSubmitted: (value) {
+            //when the search is submitted use setstate to render the screen again
             setState(() {
-              isshowuser = true;
+              isshowuser = true;                          
             });
           },
           decoration: const InputDecoration(
@@ -40,7 +43,8 @@ class _SearchScreenState extends State<SearchScreen> {
           controller: controller,
         ),
       ),
-      body: isshowuser
+      // if the user is searching then show the users, else show the posts in a staggered view
+      body: isshowuser                                        
           ? FutureBuilder(
               future: FirebaseFirestore.instance
                   .collection('users')

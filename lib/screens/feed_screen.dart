@@ -21,7 +21,7 @@ class FeedScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.message_outlined))
         ],
       ),
-      body: StreamBuilder(
+      body: StreamBuilder(                                                             //show a list of postcards using streambuilder
         stream: FirebaseFirestore.instance.collection('posts').snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

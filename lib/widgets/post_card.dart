@@ -124,7 +124,7 @@ class _PostCardState extends State<PostCard> {
                   width: double.infinity,
                   child: Image.network(
                     fit: BoxFit.cover,
-                    // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-h_3u6d-rLpm0wBggdndBEy2_h0tvbRa9ng&s'
+           
                     widget.snap['postUrl'],
                   ),
                 ),

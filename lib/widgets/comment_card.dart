@@ -26,7 +26,7 @@ class _CommentCardState extends State<CommentCard> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 16,
               ),
               child: Column(
@@ -38,7 +38,7 @@ class _CommentCardState extends State<CommentCard> {
                       children: [
                         TextSpan(
                           text: widget.snap['name'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
                           text: ' ${widget.snap['text']}',
@@ -48,14 +48,14 @@ class _CommentCardState extends State<CommentCard> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 4,
                     ),
                     child: Text(
                       DateFormat.yMMMMd()
                           .format(widget.snap['datepublished'].toDate()),
                       style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                          const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                     ),
                   )
                 ],
@@ -64,7 +64,7 @@ class _CommentCardState extends State<CommentCard> {
           ),
           Container(
             padding: const EdgeInsets.all(8),
-            child: Icon(
+            child: const Icon(
               Icons.favorite,
               size: 16,
             ),

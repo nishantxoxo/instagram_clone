@@ -31,18 +31,32 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       islaoding = true;
     });
+
+    /*login user returns a string depending if login was succesful or not, 
+    we use this to check whether login was succesful or not*/
+
     String res = await AuthMethods()
         .loginuser(email: emailcontroller.text, password: passcontroller.text);
     setState(() {
       islaoding = false;
     });
+    //if it doesnt return success then show a snackbar displaying the error
     if (res != "success") {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(res),
+        ),
+      );
     } else {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+      //if successfull push the feed screen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
           builder: (context) => ResponsiveLayoutScreen(
-              mobilescreenlayout: const MobileScreenLayout(),
-              webscreenlayout: const WebScreenLayout())));
+            mobilescreenlayout: const MobileScreenLayout(),
+            webscreenlayout: const WebScreenLayout(),
+          ),
+        ),
+      );
     }
   }
 
@@ -56,10 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(flex: 2, child: Container(),),
+              Flexible(
+                flex: 2,
+                child: Container(),
+              ),
               SvgPicture.asset(
                 'assets/ic_instagram.svg',
-                height: 64,color: primaryColor,
+                height: 64,
+                color: primaryColor,
               ),
               const SizedBox(
                 height: 64,
@@ -99,7 +117,10 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 12,
               ),
-              Flexible(flex: 2, child: Container(),),
+              Flexible(
+                flex: 2,
+                child: Container(),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -113,7 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: ()=> Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignupScreen(),)),
+                    onTap: () =>
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => SignupScreen(),
+                    )),
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(

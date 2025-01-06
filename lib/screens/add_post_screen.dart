@@ -27,13 +27,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
       islaoding =true;
     });
     try{
-      String res = await FirestoreMethods().uploadPost(desccontroller.text, _file!, uid, username, profimage);
+      String res = await FirestoreMethods().uploadPost(desccontroller.text, _file!, uid, username, profimage);         //try for posting  
       if(res == 'success'){
         
         setState(() {
           islaoding =false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('posted')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('posted')));                //show a snackbar saying "posted" if succesfully posted
         clearImage();
       }
       else {
@@ -62,9 +62,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
               child: Text('take a photo'),
               onPressed: () async {
                 Navigator.of(context).pop();
-                print("CHECK 1");
-                Uint8List file = await pickimage(ImageSource.camera);  
-                print("CHECK 2");
+         
+                Uint8List file = await pickimage(ImageSource.camera);           // select image through camera
+       
 
                 setState(() {
                   _file = file;
@@ -76,7 +76,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               child: Text('choose from gallery'),
               onPressed: () async {
                 Navigator.of(context).pop();
-                Uint8List file = await pickimage(ImageSource.gallery);  
+                Uint8List file = await pickimage(ImageSource.gallery);        // select image from gallery
                 setState(() {
                   _file = file;
                 });
@@ -84,7 +84,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             SimpleDialogOption(
               padding: EdgeInsets.all(20),
-              child: Text('cancel', style: TextStyle(color: Colors.red),),
+              child: Text('cancel', style: TextStyle(color: Colors.red),),        //cancel
               onPressed: () {
                 Navigator.of(context).pop();
                 
@@ -97,7 +97,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
 
-
+  // to clear the file after uploading is complete;
   void clearImage(){
     setState(() {
       _file = null;
@@ -106,7 +106,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   @override
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getuser;
-
+    //return a icon button if no image has been selected, return the scaffold after image has been selected/taken.
     return _file == null ? Center(child: IconButton(onPressed: () => _selectImage(context), icon: Icon(Icons.upload)),) : 
     Scaffold(
       appBar: AppBar(
